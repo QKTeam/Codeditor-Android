@@ -1,4 +1,4 @@
-package com.lagranmoon.codeditor;
+package com.qkteam.codeditor;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
