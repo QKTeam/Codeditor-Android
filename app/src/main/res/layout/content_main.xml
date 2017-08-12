@@ -11,9 +11,13 @@
         app:titleTextColor="@color/white"
         app:titleMargin="4dp"
         android:id="@+id/toolbar_main"/>
-    <TextView
+    <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="HelloWorld"/>
+        android:id="@+id/webview"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center"-->
+        <!--android:text="HelloWorld"/>-->
 </LinearLayout>
