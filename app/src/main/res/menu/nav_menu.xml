@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/storage">
+        <menu >
+            <item android:title="@string/local"
+                android:id="@+id/local_storage"
+                android:icon="@drawable/ic_local_storage"/>
+            <item android:title="@string/DropBox"
+                android:id="@+id/dropbox"
+                android:icon="@drawable/ic_dropbox"/>
+        </menu>
+    </item>
+    <item android:title="@string/setting"
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings"/>
+    <item android:title="@string/feedback"
+        android:id="@+id/feedback"
+        android:icon="@drawable/ic_feedback"/>
+    <item android:title="@string/about"
+        android:id="@+id/about"
+        android:icon="@drawable/ic_about"/>
+</menu>

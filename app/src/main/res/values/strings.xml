@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Codeditor</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="app_name">CodeEditor</string>
+    <string name="storage">存储</string>
+    <string name="local">本地</string>
+    <string name="DropBox">DropBox</string>
+    <string name="setting">设置</string>
+    <string name="feedback">反馈</string>
+    <string name="about">关于</string>
+    <string name="score">给应用评分</string>
 </resources>
