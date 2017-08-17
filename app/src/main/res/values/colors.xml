@@ -46,7 +46,9 @@
     <color name="blue_grey_primary">#607D8B</color>
     <color name="blue_grey_primary_dark">#455A64</color>
 
+
     <color name="highLightHeadFile">#0cd3e1</color>
-    <color name="highLightKeyword">#cf6809</color>
-    <color name="highLightComment">#e5494343</color>
+    <color name="highLightKeyword">#CC6632</color>
+    <color name="highLightCommentGrey">#808080</color>
+    <color name="highLightCommentGreen">#388E3C</color>
 </resources>
