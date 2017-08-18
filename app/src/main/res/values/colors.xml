@@ -51,4 +51,5 @@
     <color name="highLightKeyword">#CC6632</color>
     <color name="highLightCommentGrey">#808080</color>
     <color name="highLightCommentGreen">#388E3C</color>
+    <color name="highLightNumber">#6897bb</color>
 </resources>

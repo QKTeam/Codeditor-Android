@@ -15,18 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
-        android:background="#2b2b2b"
+         android:background="#2b2b2b"
         >
         <com.qkteam.codeditor.CodeEditor
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:typeface="monospace"
             android:gravity="start|top"
+            android:textSize="16dp"
             android:textColor="#A9B7C6"
             android:background="#2b2b2b"/>
     </ScrollView>
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center"-->
-        <!--android:text="HelloWorld"/>-->
 </LinearLayout>
