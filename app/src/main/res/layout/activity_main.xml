@@ -7,11 +7,20 @@
     tools:context="com.qkteam.codeditor.MainActivity"
     android:fitsSystemWindows="true"
     android:id="@+id/drawer_main">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/content_main"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
 
-    <include
-        layout="@layout/content_main"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_container"/>
+    </FrameLayout>
+
        
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"

@@ -11,19 +11,36 @@
         app:titleTextColor="@color/white"
         app:titleMargin="4dp"
         android:id="@+id/toolbar_main"/>
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-         android:background="#2b2b2b"
-        >
-        <com.qkteam.codeditor.CodeEditor
+        android:layout_height="match_parent">
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:typeface="monospace"
-            android:gravity="start|top"
-            android:textSize="16dp"
-            android:textColor="#A9B7C6"
-            android:background="#2b2b2b"/>
-    </ScrollView>
+            android:layout_margin="16dp"
+            android:id="@+id/list_view_main"/>
+        <com.github.clans.fab.FloatingActionMenu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            app:menu_colorNormal="@color/colorPrimaryDark"
+            app:menu_labels_colorPressed="@color/colorPrimaryDark"
+            android:layout_margin="16dp">
+            <com.github.clans.fab.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_create_new_folder_black_24dp"
+                app:fab_label="创建文件"
+                app:fab_colorNormal="@color/colorPrimaryDark"
+                app:fab_colorPressed="@color/colorPrimaryDark"/>
+            <com.github.clans.fab.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_folder_open_black_24dp"
+                app:fab_label="打开文件"
+                app:fab_colorNormal="@color/colorPrimaryDark"
+                app:fab_colorPressed="@color/colorPrimaryDark"/>
+        </com.github.clans.fab.FloatingActionMenu>
+    </FrameLayout>
+
 </LinearLayout>

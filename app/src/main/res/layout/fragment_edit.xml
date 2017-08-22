@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white"
+        app:titleMargin="4dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2b2b2b">
+        <com.qkteam.codeditor.CodeEditor
+            android:id="@+id/code_editor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2b2b2b"
+            android:gravity="start|top"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#A9B7C6"
+            android:textSize="16dp"
+            android:typeface="monospace" />
+    </ScrollView>
+</LinearLayout>

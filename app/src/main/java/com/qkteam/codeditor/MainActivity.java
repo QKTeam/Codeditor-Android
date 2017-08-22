@@ -1,24 +1,32 @@
 package com.qkteam.codeditor;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity  {
-
+    private static final String TAG = "MainActivity";
     private DrawerLayout drawer;
     private Toolbar toolbar;
+    private ListView listView;
+    private List<File> fileList = new ArrayList<>();
 
     @Override
     public void onBackPressed() {
@@ -36,9 +44,22 @@ public class MainActivity extends AppCompatActivity  {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
-
         setWindowStatus();
         initDrawer();
+        initListView();
+    }
+
+    private void initListView() {
+        fileList = FileUtil.instance.readFileList(getExternalFilesDir("code").getPath());
+        listView = (ListView) findViewById(R.id.list_view_main);
+        listView.setAdapter(new MyAdapter(MainActivity.this, fileList));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new EditFragment()).addToBackStack(null).commit();
+                Log.i(TAG, "onItemClick: .........................");
+            }
+        });
     }
 
     private void initDrawer() {
@@ -68,7 +89,6 @@ public class MainActivity extends AppCompatActivity  {
                         drawer.closeDrawer(GravityCompat.START);
                         break;
                 }
-
                 return true;
             }
         });
