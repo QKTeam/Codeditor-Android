@@ -26,9 +26,9 @@ import java.util.regex.Pattern;
 
 public class CodeEditor extends android.support.v7.widget.AppCompatEditText {
 
-    public final int C = 1;
-    public final int CPP = 2;
-    public final int JAVA = 3;
+    public static final int C = 1;
+    public static final int CPP = 2;
+    public static final int JAVA = 3;
 
     public static Pattern PATTERN_KEY_WORD_C = Pattern.compile("\\b"+
             "auto|short|int|long|float|double|char|struct|union|"+
@@ -94,6 +94,10 @@ public class CodeEditor extends android.support.v7.widget.AppCompatEditText {
         super(context);
     }
 
+    public CodeEditor(Context context, AttributeSet attrs){
+        this(context, attrs, 0);
+    }
+
     public CodeEditor(Context context, AttributeSet attrs, int type) {
         super(context, attrs);
         this.type = type;
@@ -108,10 +112,6 @@ public class CodeEditor extends android.support.v7.widget.AppCompatEditText {
             }
         });
         init();
-    }
-
-    private float getPixels(int dp) {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
     }
 
     private void init(){
@@ -184,6 +184,14 @@ public class CodeEditor extends android.support.v7.widget.AppCompatEditText {
                 count--;
         }
         return count;
+    }
+
+    /**
+     * 在{@code editable}的{@code position}位置之后添加{@code count}个制表符}*/
+    private void addTab(Editable editable, int position, int count){
+        for (int i=0; i<count; i++){
+            editable.insert(position+1, "\u3000\u3000");
+        }
     }
 
     /**
@@ -297,26 +305,6 @@ public class CodeEditor extends android.support.v7.widget.AppCompatEditText {
         }
     }
 
-    /**
-     * 在{@code editable}的{@code position}位置之后添加{@code count}个制表符}*/
-    private void addTab(Editable editable, int position, int count){
-        for (int i=0; i<count; i++){
-            editable.insert(position+1, "\u3000\u3000");
-        }
-    }
-
-    /**
-     * 判断行数的位数，用于缩进*/
-    public int getDigitCount(){
-        int len = getLineCount();
-        int count=0;
-        while (len/10>0){
-            count++;
-            len /= 10;
-        }
-        return count;
-    }
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -335,5 +323,26 @@ public class CodeEditor extends android.support.v7.widget.AppCompatEditText {
         canvas.drawText(""+(line+1), ((int)x)+getPixels(2), y, paint);
     }
 
+    /**
+     * 判断行数的位数，用于缩进*/
+    public int getDigitCount(){
+        int len = getLineCount();
+        int count=0;
+        while (len/10>0){
+            count++;
+            len /= 10;
+        }
+        return count;
+    }
+
+    private float getPixels(int dp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
+    }
+
+    /**
+     * 当不在布局文件里添加CodeEditor时，通过这个方法设置高亮代码的类型*/
+    public void setType(int type){
+        this.type = type;
+    }
 }
 

@@ -19,28 +19,16 @@
             android:layout_height="match_parent"
             android:layout_margin="16dp"
             android:id="@+id/list_view_main"/>
-        <com.github.clans.fab.FloatingActionMenu
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            app:menu_colorNormal="@color/colorPrimaryDark"
-            app:menu_labels_colorPressed="@color/colorPrimaryDark"
-            android:layout_margin="16dp">
-            <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_create_new_folder_black_24dp"
-                app:fab_label="创建文件"
-                app:fab_colorNormal="@color/colorPrimaryDark"
-                app:fab_colorPressed="@color/colorPrimaryDark"/>
-            <com.github.clans.fab.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_folder_open_black_24dp"
-                app:fab_label="打开文件"
-                app:fab_colorNormal="@color/colorPrimaryDark"
-                app:fab_colorPressed="@color/colorPrimaryDark"/>
-        </com.github.clans.fab.FloatingActionMenu>
+            android:src="@drawable/ic_create_new_folder_black_24dp"
+            app:fab_label="创建文件"
+            app:fab_colorNormal="@color/colorPrimaryDark"
+            app:fab_colorPressed="@color/colorPrimaryDark"
+            android:id="@+id/float_action_bar_new_file"/>
     </FrameLayout>
 
 </LinearLayout>
