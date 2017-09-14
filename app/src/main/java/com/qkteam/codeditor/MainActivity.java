@@ -1,5 +1,6 @@
 package com.qkteam.codeditor;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private List<File> fileList = new ArrayList<>();
     int type = 0;
     private FloatingActionButton floatingActionButton;
+    public static MyAdapter adapter;
 
     @Override
     public void onBackPressed() {
@@ -61,24 +64,33 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                View view1 = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_list, null);
-                final ListView listView = view1.findViewById(R.id.dialog_list_view);
-
-                builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                View fileTypeView = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_list, null);
+                ListView listView = fileTypeView.findViewById(R.id.dialog_list_view);
+                //用来选择要创建的文件类型
+                final Dialog fileTypeDialog = new AlertDialog.Builder(MainActivity.this).setView(fileTypeView).create();
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        type = listView.getSelectedItemPosition()+1;
-                        EditFragment fragment = new EditFragment(MainActivity.this);
-                        Bundle args = new Bundle();
-                        args.putInt("fileType", type);
-                        args.putString("fileName",EditFragment.DEFAULT_FILE_NAME +"*"+(fileList.size()+1)+FileUtil.instance.getFileSuffix(type));
-                        fragment.setArguments(args);
-                        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        type = i+1;
+                        final EditText editText = new EditText(MainActivity.this);
+                        //用来给文件命名
+                        final Dialog dialog = new AlertDialog.Builder(MainActivity.this).setTitle("请输入文件名").setView(editText)
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        EditFragment fragment = new EditFragment(MainActivity.this);
+                                        Bundle args = new Bundle();
+                                        args.putInt("fileType", type);
+                                        args.putString("fileName",editText.getText().toString()+FileUtil.instance.getFileSuffix(type));
+                                        fragment.setArguments(args);
+                                        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                                    }
+                                }).create();
+                        dialog.show();
+                        fileTypeDialog.dismiss();
                     }
                 });
-                builder.setView(view1);
-                builder.show();
+                fileTypeDialog.show();
             }
         });
     }
@@ -86,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
     private void initListView() {
         fileList = FileUtil.instance.readFileList(getExternalFilesDir("code").getPath());
         listView = (ListView) findViewById(R.id.list_view_main);
-        listView.setAdapter(new MyAdapter(MainActivity.this, fileList));
+        adapter = new MyAdapter(MainActivity.this, fileList);
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -106,14 +119,20 @@ public class MainActivity extends AppCompatActivity {
                         type = CodeEditor.JAVA;
                         break;
                     default:
-                        type = CodeEditor.C;
+                        type = 0;
                         break;
                 }
                 bundle.putInt("fileType", type);
                 bundle.putString("fileName",fileList.get(i).getName());
                 fragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).addToBackStack(null).commit();
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                return true;
             }
         });
     }
@@ -163,6 +182,4 @@ public class MainActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.TRANSPARENT);
     }
-
-
 }

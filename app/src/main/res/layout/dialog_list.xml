@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:entries="@array/languages"
-        android:listSelector="@color/blue_grey_primary"
+        android:listSelector="@color/colorPrimary"
         android:id="@+id/dialog_list_view"/>
 
 </LinearLayout>

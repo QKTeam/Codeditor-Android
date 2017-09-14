@@ -29,19 +29,20 @@ public class CodeEditor extends android.support.v7.widget.AppCompatEditText {
     public static final int C = 1;
     public static final int CPP = 2;
     public static final int JAVA = 3;
+    private static final String TAG = "CodeEditor";
 
-    public static Pattern PATTERN_KEY_WORD_C = Pattern.compile("\\b"+
+    public static Pattern PATTERN_KEY_WORD_C = Pattern.compile("\\b("+
             "auto|short|int|long|float|double|char|struct|union|"+
             "enum|typedef|const|unsigned|signed|extern|register|"+
             "static|volatile|void|if|else|switch|case|for|do|while"+
             "goto|continue|break|default|sizeof|return"+
-            "\\b");
+            ")\\b");
 
     //匹配头文件等
-    public static Pattern PATTERN_HEAD_FILE_C = Pattern.compile("[^\\s\\S]*\\b"+
-            "#include|#Define"+"\\b");
+    public static Pattern PATTERN_HEAD_FILE_C = Pattern.compile("\\B"+
+            "#include|#Define"+".*");
 
-    public static Pattern PATTERN_KEY_WORD_CPP = Pattern.compile("\\b" +
+    public static Pattern PATTERN_KEY_WORD_CPP = Pattern.compile("\\b(" +
             "asm|auto|bool|break|case|catch|char|class|const|" +
             "const_cast|continue|default|delete|do|double|dyamic_cast|" +
             "else|enum|explicit|export|extern|false|float|for|friend|" +
@@ -50,17 +51,17 @@ public class CodeEditor extends android.support.v7.widget.AppCompatEditText {
             "short|signed|sizeof|static|static_cast|struct|switch|template|" +
             "this|throw|true|try|typedef|typeid|typename|union|unsigned|" +
             "using|virtual|void|volatile|wchar_t|while" +
-            "\\b");
+            ")\\b");
 
-    public static Pattern PATTERN_KEY_WORD_JAVA = Pattern.compile("\\b"+
+    public static Pattern PATTERN_KEY_WORD_JAVA = Pattern.compile("\\b("+
             "private|protected|public|"+
             "abstract|class|externs|final|implements|interface|native|" +
             "new|static|strictfp|synchronized|transient|volatile|" +
             "break|case|continue|default|do|instanceof" +
             "return|switch|else|for|if|while|" +
-            "boolen|byte|char|double|float|int|long|short|null" +
+            "boolen|byte|char|double|float|int|long|short|null|" +
             "super|this|void" +
-            "\\b");
+            ")\\b");
 
     //匹配错误处理
     public static Pattern PATTERN_ERROR_MESSAGE_JAVA = Pattern.compile("\\b" +

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,7 +50,9 @@ public class EditFragment extends Fragment {
         editor = view.findViewById(R.id.code_editor);
         editType = getArguments().getInt("fileType");
         fileName = (getArguments().getString("fileName")==null)?"":getArguments().getString("fileName");
+        editor.setType(editType);
         editor.setText(FileUtil.instance.readFile(context.getExternalFilesDir("code").getPath(), fileName));
+        Log.i("EditFragment", "onViewCreated: "+FileUtil.instance.readFile(context.getExternalFilesDir("code").getPath(), fileName));
         setHasOptionsMenu(true);
         initToolbar(view);
     }

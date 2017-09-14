@@ -42,6 +42,10 @@ public class MyAdapter extends BaseAdapter {
         return i;
     }
 
+    public void addItem(String fileName, int position){
+        fileList.add(0, new File(context.getExternalFilesDir("code"), fileName));
+    }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View convertView = view;
